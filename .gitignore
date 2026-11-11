@@ -1,0 +1,14 @@
+# 依存パッケージ（bun install で復元できる）
+node_modules/
+
+# ビルド結果（GitHub Actions で作り直す）
+dist/
+
+# ログ
+*.log
+
+# OSやエディタが作るファイル
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
