@@ -82,10 +82,3 @@ src/
 ├─ themes/     # テーマ（バー、プラズマ、パーティクル）
 └─ ui/         # 画面の部品とキー操作
 ```
-
-## デプロイ
-
-`main` ブランチへプッシュすると、GitHub Actions がフォーマット、lint、テスト、ビルドを行い、GitHub Pages へ公開します。
-
-- リポジトリの Settings → Pages で、Source を「GitHub Actions」にしてください
-- 公開先のパスは `vite.config.ts` の `base`（`/otomoyou/`）で決まります。リポジトリ名を変える場合は、あわせて変更してください

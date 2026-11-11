@@ -22,20 +22,19 @@ void main() {
   );
   velocity += flow * (0.4 + energy * 1.4) * (0.6 + 0.8 * section) * deltaTime;
 
-  // キックで中心から外へ吹き飛ばす
-  float radius = max(length(position), 0.05);
-  velocity += position / radius * (punch * 9.0 + beat * 3.0) * deltaTime;
+  // キックで中心から外へ吹き飛ばす。中心に近いほど弱くして、真ん中に空洞ができないようにする
+  velocity += position * (punch * 9.0 + beat * 3.0) * deltaTime;
 
   // 画面の外へ出ていかないように、中心へ引き戻す
   velocity -= position * 0.9 * deltaTime;
   velocity *= exp(-deltaTime * 1.6);
   position += velocity * deltaTime;
 
-  // 遠くへ行った粒子は中心付近からやり直す
+  // 遠くへ行った粒子は中心付近からやり直す。平方根を取って、円の中に均等に散らばるようにする
   if (length(position) > RESPAWN_RADIUS) {
     float seed = float(gl_VertexID) * 0.0013 + time;
     float angle = hash(seed) * 6.28318;
-    float distance = 0.05 + hash(seed + 1.7) * 0.35;
+    float distance = sqrt(hash(seed + 1.7)) * 0.6;
     position = vec2(cos(angle), sin(angle)) * distance;
     velocity = vec2(0.0);
   }
